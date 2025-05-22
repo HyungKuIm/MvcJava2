@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="<c:url value="/resources/styles/standard.css"/>">
 <title>항공관련 게시판</title>
 </head>
 <body>
@@ -22,12 +23,26 @@
 	<c:forEach items="${boardPosts}" var="boardPost">
 	<tr>
 		<td>${boardPost.id}</td>
-		<td>${boardPost.title}</td>
+		<td><a href="<c:url value="/boardPost/${boardPost.id}"/>">${boardPost.title}</a></td>
 		<td>${boardPost.hit}</td>
 		<td>${boardPost.created_at}</td>
 	</tr>
 	</c:forEach>
 	</tbody>
 	</table>
+	<a href="<c:url value="/boardPost?form"/>">게시글 쓰기</a>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+

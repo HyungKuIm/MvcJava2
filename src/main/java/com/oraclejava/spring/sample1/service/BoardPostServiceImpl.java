@@ -22,6 +22,26 @@ public class BoardPostServiceImpl implements BoardPostService {
 		// TODO Auto-generated method stub
 		return Lists.newArrayList(boardPostRepository.findAll());
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public BoardPost findById(Integer id) {
+		// TODO Auto-generated method stub
+		return boardPostRepository.findOne(id);
+	}
+	
+	@Override
+	public void deleteById(Integer id) {
+		// TODO Auto-generated method stub
+		boardPostRepository.delete(id);
+	}
+	
+	@Override
+	public BoardPost save(BoardPost boardPost) {
+		// TODO Auto-generated method stub
+		return boardPostRepository.save(boardPost);
+	}
+	
 
 	@Autowired
 	public void setBoardPostRepository(BoardPostRepository boardPostRepository) {

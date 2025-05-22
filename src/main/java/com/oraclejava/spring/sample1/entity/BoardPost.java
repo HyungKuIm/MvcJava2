@@ -3,8 +3,12 @@ package com.oraclejava.spring.sample1.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -12,20 +16,44 @@ import javax.persistence.Table;
 public class BoardPost implements Serializable {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,
+				generator = "seq_board_post_gen")
+	@SequenceGenerator(
+			name = "seq_board_post_gen",
+			sequenceName = "SEQ_BOARD_POST",
+			allocationSize = 1)
 	private Integer id;
+	
+	@Column(insertable = false)
 	private String status;
+	
+	@Column(insertable = false)
 	private String type;
+	
+	@Column(insertable = false)
 	private Integer parent_id;
+	
 	private Integer num;
 	private String reply;
 	private String category;
 	private String title;
+	
+	@Column(insertable = false)
 	private String is_notice;
+	
 	private String author_name;
+	
+	@Column(insertable = false)
 	private Integer hit;
+	
+	@Column(insertable = false, updatable = false)
 	private Date created_at;
+	
+	@Column(insertable = false)
 	private Date updated_at;
+	
 	private String author_pass;
+	
 	private String content;
 	
 	

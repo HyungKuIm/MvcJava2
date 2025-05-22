@@ -1,5 +1,8 @@
 package com.oraclejava.spring.sample1;
 
+import javax.servlet.Filter;
+
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class ProjectInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -21,5 +24,20 @@ public class ProjectInitializer extends AbstractAnnotationConfigDispatcherServle
 		// TODO Auto-generated method stub
 		return new String[] { "/" };
 	}
+	
+	@Override
+	protected Filter[] getServletFilters() {
+		// TODO Auto-generated method stub
+		CharacterEncodingFilter cef = new CharacterEncodingFilter();
+		cef.setEncoding("UTF-8");
+		cef.setForceEncoding(true);
+		return new Filter[] { cef };
+	}
 
 }
+
+
+
+
+
+

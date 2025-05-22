@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+/* main elements */
+
+body,div,td {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #666;
+}
+
+body {
+    background-color: #fff;
+    text-align: center;
+}
+
+div {
+    text-align: left;
+}
+
+/* table elements */
+
+table {
+    background: #EEEEEE;
+    margin: 2px 0 0 0;
+    border: 1px solid #BBBBBB;
+    border-collapse: collapse;
+    width: 100%
+}
+
+table table {
+    margin: -5px 0;
+    border: 0px solid #e0e7d3;
+    width: 100%;
+}
+
+table td,table th {
+    padding: 2px;
+    border: 1px solid #CCCCCC;
+}
+
+table td form {
+    text-align:center;
+    vertical-align: middle;
+    margin: 0px;
+}
+
+table th {
+    font-size: 0.9em;
+    text-align: left;
+    font-weight: bold;
+    color: #FFF;
+    background: #999;
+}
+
+table thead {
+    font-weight: bold;
+    font-style: italic;
+    background-color: #BBBBBB;
+}
+
+table a:link {color: #303030;}
+
+/* form elements */
+input {
+    height:20px;
+}
+
+input, textarea, select {
+    border:1px solid #B3B3B3;
+}
+
+
+.form-row {
+	display: flex;
+	width: 100%;
+}
+.form-label {
+	width: 100px;
+	flex-shrink: 0;
+	font-size: 1rem;
+	font-weight: 700;
+	/* padding-top: .725rem; */
+	padding-right: .375rem;
+}
+
+.required {
+	font-size: 0;
+	display: inline-block;
+	vertical-align: top;
+}
+.required:before {
+	content: '*';
+	color: red;
+	font-size: .9rem;
+}
+.form-wrap {
+	flex: 1;
+	padding: .375rem .75rem .375rem 0;
+}
