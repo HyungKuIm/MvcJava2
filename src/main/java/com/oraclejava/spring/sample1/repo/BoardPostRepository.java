@@ -7,6 +7,6 @@ import com.oraclejava.spring.sample1.entity.BoardPost;
 
 public interface BoardPostRepository extends PagingAndSortingRepository<BoardPost, Integer>{
 
-	@Query("select b from BoardPost b order by b.id desc")
+	@Query("select b from BoardPost b order by b.num desc, b.reply asc")
 	Iterable<BoardPost> findAll();
 }

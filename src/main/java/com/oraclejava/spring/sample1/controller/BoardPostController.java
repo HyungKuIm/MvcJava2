@@ -31,7 +31,7 @@ public class BoardPostController {
 	
 	@GetMapping(value = "/{id}")
 	public String show(@PathVariable("id") Integer id, Model model) {
-		BoardPost boardPost = boardPostService.findById(id);
+		BoardPost boardPost = boardPostService.findByIdAndIncreaseHit(id);
 		model.addAttribute("boardPost", boardPost);
 		
 		return "posts/show";
@@ -54,7 +54,14 @@ public class BoardPostController {
 		model.asMap().clear();  // 선택사항. 맵 클리어
 		redirectAttributes.addFlashAttribute("message", "글 수정에 성공하였습니다.");
 		
-		boardPostService.save(boardPost);
+		//boardPostService.save(boardPost);
+		BoardPost original = boardPostService.findById(boardPost.getId());
+		original.setTitle(boardPost.getTitle());
+		original.setAuthor_name(boardPost.getAuthor_name());
+		original.setAuthor_pass(boardPost.getAuthor_pass());
+		original.setContent(boardPost.getContent());
+		
+		boardPostService.save(original);
 		
 		return "redirect:/boardPost/" + boardPost.getId();
 	}
@@ -65,6 +72,28 @@ public class BoardPostController {
 		return "redirect:/boardPost";
 	}
 	
+	@GetMapping(value = "/{id}/reply")
+	public String replyForm(@PathVariable("id") Integer id, Model model) {
+		BoardPost boardPost = boardPostService.findById(id);
+		model.addAttribute("boardPost", boardPost);
+		return "posts/reply";
+	}
+	
+	@PostMapping(value = "/{id}/reply")
+	public String reply(@PathVariable("id") Integer id, @Validated BoardPost boardPost, BindingResult bindingResult,
+			Model model, RedirectAttributes redirectAttributes) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("message", "답글 작성에 실패하였습니다.");
+			model.addAttribute("boardPost", boardPost);
+			return "posts/create";
+		}
+		model.asMap().clear();  // 선택사항. 맵 클리어
+		redirectAttributes.addFlashAttribute("message", "답글 작성에 성공하였습니다.");
+		
+		boardPostService.reply(id, boardPost);
+		
+		return "redirect:/boardPost";
+	}
 	
 	@GetMapping(params = "form")
 	public String createForm(Model model) {

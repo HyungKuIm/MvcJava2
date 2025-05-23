@@ -30,11 +30,11 @@ public class BoardPost implements Serializable {
 	@Column(insertable = false)
 	private String type;
 	
-	@Column(insertable = false)
+	//@Column(insertable = false)
 	private Integer parent_id;
 	
 	private Integer num;
-	private String reply;
+	private Integer reply;
 	private String category;
 	private String title;
 	
@@ -62,7 +62,7 @@ public class BoardPost implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public BoardPost(Integer id, String status, String type, Integer parent_id, Integer num, String reply,
+	public BoardPost(Integer id, String status, String type, Integer parent_id, Integer num, Integer reply,
 			String category, String title, String is_notice, String author_name, Integer hit, Date created_at,
 			Date updated_at, String author_pass, String content) {
 		super();
@@ -112,10 +112,10 @@ public class BoardPost implements Serializable {
 	public void setNum(Integer num) {
 		this.num = num;
 	}
-	public String getReply() {
+	public Integer getReply() {
 		return reply;
 	}
-	public void setReply(String reply) {
+	public void setReply(Integer reply) {
 		this.reply = reply;
 	}
 	public String getCategory() {
@@ -172,6 +172,16 @@ public class BoardPost implements Serializable {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	
+	// 조회수 증가
+	public void increaseHit() {
+		if (this.hit != null) {
+			this.hit++;
+		} else {
+			this.hit = 0;
+		}
+	}
+	
 	@Override
 	public String toString() {
 		return "BoardPost [id=" + id + ", status=" + status + ", type=" + type + ", parent_id=" + parent_id + ", num="

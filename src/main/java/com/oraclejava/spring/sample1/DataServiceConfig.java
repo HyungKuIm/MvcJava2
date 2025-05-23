@@ -12,12 +12,14 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import oracle.jdbc.pool.OracleDataSource;
 
 @Configuration
 @EnableJpaRepositories(basePackages = "com.oraclejava.spring.sample1.repo")
 @ComponentScan(basePackages = "com.oraclejava.spring.sample1")
+@EnableTransactionManagement
 public class DataServiceConfig {
 
 	@Bean

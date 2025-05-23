@@ -55,7 +55,7 @@
 		</article>
 		<a href="<c:url value="/boardPost/${boardPost.id}?form"/>">수정</a>
 		<button type="button" onclick="deletePost(${boardPost.id})">삭제</button>
-		
+		<a href="<c:url value="/boardPost/${boardPost.id}/reply"/>">답글달기</a>
 		<a href="<c:url value="/boardPost"/>">목록</a>
 	</div>
 </body>

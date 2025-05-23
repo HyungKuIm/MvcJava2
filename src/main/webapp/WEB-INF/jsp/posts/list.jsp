@@ -23,7 +23,16 @@
 	<c:forEach items="${boardPosts}" var="boardPost">
 	<tr>
 		<td>${boardPost.id}</td>
-		<td><a href="<c:url value="/boardPost/${boardPost.id}"/>">${boardPost.title}</a></td>
+		<td>
+			<c:if test="${boardPost.reply > 0}">
+				<c:forEach begin="0" end="${boardPost.reply}">
+					&nbsp;&nbsp;
+				</c:forEach>
+			
+				<img src="<c:url value="/resources/images/re.png"/>">
+			</c:if>
+			<a href="<c:url value="/boardPost/${boardPost.id}"/>">${boardPost.title}</a>
+		</td>
 		<td>${boardPost.hit}</td>
 		<td>${boardPost.created_at}</td>
 	</tr>
@@ -33,16 +42,3 @@
 	<a href="<c:url value="/boardPost?form"/>">게시글 쓰기</a>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-

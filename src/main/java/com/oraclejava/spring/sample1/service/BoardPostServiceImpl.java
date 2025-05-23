@@ -31,6 +31,13 @@ public class BoardPostServiceImpl implements BoardPostService {
 	}
 	
 	@Override
+	public BoardPost findByIdAndIncreaseHit(Integer id) {
+		BoardPost boardPost = boardPostRepository.findOne(id);
+		boardPost.increaseHit();  // 조회수 증가
+		return boardPost;
+	}
+	
+	@Override
 	public void deleteById(Integer id) {
 		// TODO Auto-generated method stub
 		boardPostRepository.delete(id);
@@ -39,9 +46,37 @@ public class BoardPostServiceImpl implements BoardPostService {
 	@Override
 	public BoardPost save(BoardPost boardPost) {
 		// TODO Auto-generated method stub
-		return boardPostRepository.save(boardPost);
+		//return boardPostRepository.save(boardPost);
+		BoardPost savedPost = boardPostRepository.save(boardPost);
+		savedPost.setNum(savedPost.getId());
+		savedPost.setReply(0);
+		savedPost.setHit(0);
+		savedPost.setType("POST"); // POST: 게시글, COMMENT: 댓글
+		//savedPost.setParent_id(null);
+		
+		return boardPostRepository.save(savedPost);
 	}
 	
+	@Override
+	public BoardPost reply(Integer parentId, BoardPost boardPost) {
+		BoardPost parent = 
+				boardPostRepository.findOne(parentId);
+		
+		BoardPost reply = new BoardPost();
+		reply.setTitle(boardPost.getTitle());
+		reply.setAuthor_name(boardPost.getAuthor_name());
+		reply.setAuthor_pass(boardPost.getAuthor_pass());
+		reply.setContent(boardPost.getContent());
+		
+		// num은 원글의 num을 따라감
+		reply.setNum(parent.getNum());
+		
+		// 계층구조 설정
+		reply.setParent_id(parent.getId());
+		reply.setReply(parent.getReply() + 1);
+		
+		return boardPostRepository.save(reply);
+	}
 
 	@Autowired
 	public void setBoardPostRepository(BoardPostRepository boardPostRepository) {
